@@ -6,6 +6,12 @@
 
 <h1 align="center"><b>QRAlarm</b></h1>
 
+<p align="center">
+  <a href="https://github.com/thesophile/qralarm/releases">
+    <img src="https://img.shields.io/badge/Download-APK-brightgreen?style=for-the-badge&logo=android" />
+  </a>
+</p>
+
 Say goodbye to oversleeping with QRAlarm! 🚀
 
 QRAlarm - QR Code Alarm Clock is an effective and smart alarm clock that gets you out of bed by making you scan the QR or Barcode to turn off the alarm! This makes it perfect for both heavy sleepers and productive early risers! 🔝
@@ -54,6 +60,13 @@ Download the app now, set up and configure your alarms and let QRAlarm work its 
 </p>  
 
 ## Setup
+
+**For this Fork:**
+
+Download [app-debug.apk](https://github.com/thesophile/qralarm/releases)
+
+**For the Original**
+
 * Download [qralarm-android-signed.apk](https://github.com/sweakpl/qralarm-android/releases),
 * Put it e.g. in a `Downloads` folder in Your Android device,
 * Go to the `Downloads` folder on the Android device,
