@@ -169,6 +169,9 @@
     <string name="get_it_now">Päivitä nyt!</string>
     <string name="not_now">Ei nyt</string>
     <string name="special_settings">Erikoisasetukset</string>
+    <string name="alarm_settings">Hälytysasetukset</string>
+    <string name="lock_volume_buttons">Lukitse äänenvoimakkuusnapit</string>
+    <string name="lock_volume_buttons_description">Kun hälytys soi, äänenvoimakkuutta ei voi laskea eikä mykistää.</string>
     <string name="do_not_leave_alarm">Estä poistuminen herätysnäytöstä</string>
     <string name="do_not_leave_alarm_description">Pidä herätysnäyttö näkyvissä herätyksen soidessa.</string>
     <string name="block_volume_down">Estä äänenvoimakkuuden pienentäminen</string>

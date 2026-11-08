@@ -169,6 +169,9 @@
     <string name="get_it_now">Oppgrader nå!</string>
     <string name="not_now">Ikke nå</string>
     <string name="special_settings">Spesielle innstillinger</string>
+    <string name="alarm_settings">Alarminnstillinger</string>
+    <string name="lock_volume_buttons">Lås volumknappene</string>
+    <string name="lock_volume_buttons_description">Mens alarmen ringer kan ikke volumet senkes eller dempes.</string>
     <string name="do_not_leave_alarm">Ikke forlat alarmskjermen</string>
     <string name="do_not_leave_alarm_description">Hold alarmskjermen synlig mens alarmen ringer.</string>
     <string name="block_volume_down">Blokker volum ned</string>

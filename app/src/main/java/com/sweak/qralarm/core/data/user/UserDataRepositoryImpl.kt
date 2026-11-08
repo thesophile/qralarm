@@ -93,6 +93,15 @@ class UserDataRepositoryImpl @Inject constructor(
             it ?: Theme.Default
         }
 
+    override suspend fun setAlarmVolumeLockEnabled(enabled: Boolean) {
+        qrAlarmPreferencesDataSource.setAlarmVolumeLockEnabled(enabled = enabled)
+    }
+
+    override val isAlarmVolumeLockEnabled: Flow<Boolean>
+        get() = qrAlarmPreferencesDataSource.getAlarmVolumeLockEnabled().map {
+            it == true
+        }
+
     override suspend fun setWhatsNewLastShownVersionCode(versionCode: Int) {
         qrAlarmPreferencesDataSource.setWhatsNewLastShownVersionCode(versionCode = versionCode)
     }

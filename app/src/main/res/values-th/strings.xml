@@ -159,6 +159,9 @@
     <string name="get_it_now">อัปเกรดเลย!</string>
     <string name="not_now">ไม่ใช่ตอนนี้</string>
     <string name="special_settings">การตั้งค่าพิเศษ</string>
+    <string name="alarm_settings">การตั้งค่านาฬิกาปลุก</string>
+    <string name="lock_volume_buttons">ล็อกปุ่มปรับระดับเสียง</string>
+    <string name="lock_volume_buttons_description">ขณะที่นาฬิกาปลุกดัง จะไม่สามารถลดระดับเสียงหรือปิดเสียงได้</string>
     <string name="do_not_leave_alarm">ห้ามออกจากหน้าปลุก</string>
     <string name="do_not_leave_alarm_description">ให้แสดงหน้าปลุกค้างไว้ขณะที่เสียงปลุกดัง</string>
     <string name="block_volume_down">ป้องกันการลดเสียง</string>

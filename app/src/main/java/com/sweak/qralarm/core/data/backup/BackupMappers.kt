@@ -173,6 +173,7 @@ fun BackupPreferences.toPreferencesDto(): PreferencesDto = PreferencesDto(
     },
     emergencyRequiredMatches = emergencyRequiredMatches,
     emergencyDisableRepeatingAlarms = emergencyDisableRepeatingAlarms,
+    alarmVolumeLockEnabled = alarmVolumeLockEnabled,
     theme = theme
 )
 
@@ -181,6 +182,7 @@ fun PreferencesDto.toBackupPreferences(): BackupPreferences = BackupPreferences(
     emergencySliderRange = emergencySliderRange?.let { it.first..it.last },
     emergencyRequiredMatches = emergencyRequiredMatches,
     emergencyDisableRepeatingAlarms = emergencyDisableRepeatingAlarms,
+    alarmVolumeLockEnabled = alarmVolumeLockEnabled,
     theme = if (theme is Theme.Dynamic && Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
         Theme.Default
     } else {

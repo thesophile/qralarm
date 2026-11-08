@@ -138,6 +138,9 @@
     <string name="get_it_now">지금 업그레이드하세요!</string>
     <string name="not_now">지금은 안함</string>
     <string name="special_settings">특별 설정</string>
+    <string name="alarm_settings">알람 설정</string>
+    <string name="lock_volume_buttons">볼륨 버튼 잠금</string>
+    <string name="lock_volume_buttons_description">알람이 울리는 동안에는 볼륨을 낮추거나 음소거할 수 없습니다.</string>
     <string name="do_not_leave_alarm">알람 화면 이탈 금지</string>
     <string name="do_not_leave_alarm_description">알람이 울릴 때 알람 화면을 계속 표시합니다.</string>
     <string name="block_volume_down">볼륨 감소 차단</string>

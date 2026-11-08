@@ -152,6 +152,9 @@
     <string name="get_it_now">Mettez à niveau maintenant !</string>
     <string name="not_now">Pas maintenant</string>
     <string name="special_settings">Paramètres spéciaux</string>
+    <string name="alarm_settings">Paramètres d\'alarme</string>
+    <string name="lock_volume_buttons">Verrouiller les boutons de volume</string>
+    <string name="lock_volume_buttons_description">Tant que l\'alarme sonne, le volume ne peut pas être baissé ni mis en sourdine.</string>
     <string name="do_not_leave_alarm">Ne pas quitter l\'alarme</string>
     <string name="do_not_leave_alarm_description">Continue d\'afficher l\'écran d\'alarme lorsqu\'elle sonne.</string>
     <string name="block_volume_down">Bloquer la réduction du volume</string>

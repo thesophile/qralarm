@@ -118,6 +118,9 @@
     <string name="get_it_now">今すぐアップグレード！</string>
     <string name="not_now">今はしない</string>
     <string name="special_settings">特別設定</string>
+    <string name="alarm_settings">アラーム設定</string>
+    <string name="lock_volume_buttons">音量キーのロック</string>
+    <string name="lock_volume_buttons_description">アラームが鳴っている間は、音量を下げることもミュートすることもできません。</string>
     <string name="do_not_leave_alarm">アラーム画面から離れない</string>
     <string name="do_not_leave_alarm_description">アラームが鳴っている間、アラーム画面を表示し続けます。</string>
     <string name="block_volume_down">音量を下げることをブロック</string>

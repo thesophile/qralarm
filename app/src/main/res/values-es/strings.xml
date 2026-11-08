@@ -152,6 +152,9 @@
     <string name="get_it_now">¡Actualiza ahora!</string>
     <string name="not_now">Ahora no</string>
     <string name="special_settings">Configuraciones especiales</string>
+    <string name="alarm_settings">Ajustes de la alarma</string>
+    <string name="lock_volume_buttons">Bloquear los botones de volumen</string>
+    <string name="lock_volume_buttons_description">Mientras suena la alarma, el volumen no se puede bajar ni silenciar.</string>
     <string name="do_not_leave_alarm">No abandonar la alarma</string>
     <string name="do_not_leave_alarm_description">Seguir mostrando la pantalla de alarma cuando la alarma esté sonando.</string>
     <string name="block_volume_down">Bloquear bajar volumen</string>

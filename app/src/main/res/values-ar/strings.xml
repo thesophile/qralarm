@@ -251,6 +251,9 @@
     <string name="get_it_now">رقِّ الآن!</string>
     <string name="not_now">ليس الآن</string>
     <string name="special_settings">إعدادات خاصة</string>
+    <string name="alarm_settings">إعدادات المنبه</string>
+    <string name="lock_volume_buttons">قفل أزرار الصوت</string>
+    <string name="lock_volume_buttons_description">أثناء رنين المنبه لا يمكن خفض مستوى الصوت أو كتمه.</string>
     <string name="do_not_leave_alarm">منع مغادرة شاشة المنبه</string>
     <string name="do_not_leave_alarm_description">أبقِ شاشة المنبه ظاهرة أثناء رنينه.</string>
     <string name="block_volume_down">منع خفض مستوى الصوت</string>

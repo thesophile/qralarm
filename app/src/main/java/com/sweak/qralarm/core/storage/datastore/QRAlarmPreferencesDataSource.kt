@@ -183,6 +183,18 @@ class QRAlarmPreferencesDataSource @Inject constructor(
         }
     }
 
+    suspend fun setAlarmVolumeLockEnabled(enabled: Boolean) {
+        dataStore.edit { preferences ->
+            preferences[ALARM_VOLUME_LOCK_ENABLED] = enabled
+        }
+    }
+
+    fun getAlarmVolumeLockEnabled(): Flow<Boolean?> {
+        return dataStore.data.map { preferences ->
+            preferences[ALARM_VOLUME_LOCK_ENABLED]
+        }
+    }
+
     suspend fun setTheme(theme: Theme) {
         dataStore.edit { preferences ->
             preferences[THEME] = json.encodeToString(theme)
@@ -216,5 +228,6 @@ class QRAlarmPreferencesDataSource @Inject constructor(
             booleanPreferencesKey("emergencyDisableRepeatingAlarms")
         val THEME = stringPreferencesKey("theme")
         val WHATS_NEW_LAST_SHOWN_VERSION_CODE = intPreferencesKey("whatsNewLastShownVersionCode")
+        val ALARM_VOLUME_LOCK_ENABLED = booleanPreferencesKey("alarmVolumeLockEnabled")
     }
 }

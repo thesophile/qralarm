@@ -5,4 +5,6 @@
     <string name="whats_new_entry_1_note_1">שמירת כל הנתונים שלך בקובץ</string>
     <string name="whats_new_entry_1_note_2">ייבוא הנתונים שלך, למשל, לטלפון חדש</string>
     <string name="whats_new_entry_2">שיפורים בהשמעת הרינגטון</string>
+    <string name="whats_new_entry_3">נעל את כפתורי העוצמה</string>
+    <string name="whats_new_entry_3_note_1">מונע מהשתקת השעון בזמן שהוא מצלצל</string>
 </resources>

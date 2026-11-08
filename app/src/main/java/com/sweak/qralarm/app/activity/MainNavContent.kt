@@ -14,6 +14,7 @@ import com.sweak.qralarm.core.navigation.Navigator
 import com.sweak.qralarm.core.navigation.SharedViewModelStoreNavEntryDecorator
 import com.sweak.qralarm.core.navigation.routes.AddEditAlarmRoute
 import com.sweak.qralarm.core.navigation.routes.AdvancedAlarmSettingsRoute
+import com.sweak.qralarm.core.navigation.routes.AlarmSettingsRoute
 import com.sweak.qralarm.core.navigation.routes.AlarmsChainSettingsRoute
 import com.sweak.qralarm.core.navigation.routes.BackupRoute
 import com.sweak.qralarm.core.navigation.routes.CodesManagementRoute
@@ -35,6 +36,7 @@ import com.sweak.qralarm.features.add_edit_alarm.destinations.add_edit.AddEditAl
 import com.sweak.qralarm.features.add_edit_alarm.destinations.advanced.AdvancedAlarmSettingsScreen
 import com.sweak.qralarm.features.add_edit_alarm.destinations.alarms_chain.AlarmsChainSettingsScreen
 import com.sweak.qralarm.features.add_edit_alarm.destinations.special.SpecialAlarmSettingsScreen
+import com.sweak.qralarm.features.alarm_settings.AlarmSettingsScreen
 import com.sweak.qralarm.features.backup.BackupScreen
 import com.sweak.qralarm.features.codes_management.CodesManagementScreen
 import com.sweak.qralarm.features.custom_code_scanner.CustomCodeScannerScreen
@@ -176,6 +178,7 @@ fun MainNavContent(
                     navigator.navigate(OptimizationRoute(isLaunchedFromMenu = true))
                 },
                 onEmergencyTaskSettingsClicked = { navigator.navigate(EmergencySettingsRoute) },
+                onAlarmSettingsClicked = { navigator.navigate(AlarmSettingsRoute) },
                 onQRAlarmProClicked = { navigator.navigate(QRAlarmProRoute) },
                 onCodesManagementClicked = { navigator.navigate(CodesManagementRoute) },
                 onThemeClicked = { navigator.navigate(ThemeRoute) },
@@ -207,6 +210,12 @@ fun MainNavContent(
             ThemeScreen(
                 onBackClicked = { navigator.goBack() },
                 onGoToQRAlarmProCheckout = { navigator.navigate(QRAlarmProRoute) }
+            )
+        }
+
+        entry<AlarmSettingsRoute> {
+            AlarmSettingsScreen(
+                onBackClicked = { navigator.goBack() }
             )
         }
 

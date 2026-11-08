@@ -3,6 +3,8 @@
     <string name="whats_new_title">¿Qué hay de nuevo?</string>
     <string name="whats_new_entry_1_note_1">Guarda todos tus datos en un archivo</string>
     <string name="whats_new_entry_2">Mejoras en la reproducción del tono de llamada</string>
+    <string name="whats_new_entry_3">Bloquear los botones de volumen</string>
+    <string name="whats_new_entry_3_note_1">Evita que la alarma se silencie mientras suena</string>
     <string name="whats_new_entry_1">Función de copia de seguridad</string>
     <string name="whats_new_entry_1_note_2">Importa tus datos en, por ejemplo, un teléfono nuevo</string>
 </resources>

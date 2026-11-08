@@ -142,6 +142,9 @@
     <string name="get_it_now">Şimdi yükseltin!</string>
     <string name="not_now">Şimdi değil</string>
     <string name="special_settings">Özel ayarlar</string>
+    <string name="alarm_settings">Alarm ayarları</string>
+    <string name="lock_volume_buttons">Ses düğmelerini kilitle</string>
+    <string name="lock_volume_buttons_description">Alarm çalarken ses seviyesi düşürülemez veya sessize alınamaz.</string>
     <string name="do_not_leave_alarm">Alarmdan ayrılma</string>
     <string name="do_not_leave_alarm_description">Alarm çalarken alarm ekranını göstermeye devam et.</string>
     <string name="block_volume_down">Ses kısma tuşunu engelle</string>

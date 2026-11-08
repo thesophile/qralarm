@@ -2,6 +2,8 @@
 <resources>
     <string name="whats_new_title">Was ist neu?</string>
     <string name="whats_new_entry_2">Verbesserungen der Klingeltonwiedergabe</string>
+    <string name="whats_new_entry_3">Lautstärketasten sperren</string>
+    <string name="whats_new_entry_3_note_1">Verhindert, dass der Alarm während des Klingelns stummgeschaltet wird</string>
     <string name="whats_new_entry_1">Sicherungsfunktion</string>
     <string name="whats_new_entry_1_note_1">Speichern Sie alle Ihre Daten in einer Datei</string>
     <string name="whats_new_entry_1_note_2">Importieren Sie Ihre Daten auf z.B. ein neues Telefon</string>

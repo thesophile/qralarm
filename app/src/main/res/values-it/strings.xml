@@ -152,6 +152,9 @@
     <string name="get_it_now">Aggiorna ora!</string>
     <string name="not_now">Non adesso</string>
     <string name="special_settings">Impostazioni speciali</string>
+    <string name="alarm_settings">Impostazioni sveglia</string>
+    <string name="lock_volume_buttons">Blocca i pulsanti del volume</string>
+    <string name="lock_volume_buttons_description">Mentre la sveglia suona, il volume non può essere abbassato o silenziato.</string>
     <string name="do_not_leave_alarm">Non lasciare la sveglia</string>
     <string name="do_not_leave_alarm_description">Continua a visualizzare la schermata della sveglia quando suona.</string>
     <string name="block_volume_down">Blocca il volume verso il basso</string>

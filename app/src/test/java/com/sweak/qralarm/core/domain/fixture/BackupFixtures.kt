@@ -43,12 +43,14 @@ fun backupPreferences(
     emergencySliderRange: IntRange? = null,
     emergencyRequiredMatches: Int? = null,
     emergencyDisableRepeatingAlarms: Boolean? = null,
+    alarmVolumeLockEnabled: Boolean? = null,
     theme: Theme? = null
 ) = BackupPreferences(
     defaultAlarmCodeId = defaultAlarmCodeId,
     emergencySliderRange = emergencySliderRange,
     emergencyRequiredMatches = emergencyRequiredMatches,
     emergencyDisableRepeatingAlarms = emergencyDisableRepeatingAlarms,
+    alarmVolumeLockEnabled = alarmVolumeLockEnabled,
     theme = theme
 )
 

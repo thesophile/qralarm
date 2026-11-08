@@ -5,4 +5,6 @@
     <string name="whats_new_entry_1_note_1">Salva tutti i tuoi dati in un file</string>
     <string name="whats_new_entry_1_note_2">Importa i tuoi dati su, ad esempio, un nuovo telefono</string>
     <string name="whats_new_entry_2">Miglioramenti nella riproduzione della suoneria</string>
+    <string name="whats_new_entry_3">Blocca i pulsanti del volume</string>
+    <string name="whats_new_entry_3_note_1">Impedisce che la sveglia venga silenziata mentre suona</string>
 </resources>

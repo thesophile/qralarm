@@ -5,4 +5,6 @@
     <string name="whats_new_entry_1_note_1">Tallenna kaikki tietosi tiedostoon</string>
     <string name="whats_new_entry_1_note_2">Tuo tietosi esimerkiksi uuteen puhelimeen</string>
     <string name="whats_new_entry_2">Soittoäänen toiston parannukset</string>
+    <string name="whats_new_entry_3">Lukitse äänenvoimakkuusnapit</string>
+    <string name="whats_new_entry_3_note_1">Estää hälytyksen mykistämisen sen soidessa</string>
 </resources>

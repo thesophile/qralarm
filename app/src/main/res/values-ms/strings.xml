@@ -159,6 +159,9 @@
     <string name="get_it_now">Naik taraf sekarang!</string>
     <string name="not_now">Bukan sekarang</string>
     <string name="special_settings">Tetapan khas</string>
+    <string name="alarm_settings">Tetapan alarm</string>
+    <string name="lock_volume_buttons">Kunci butang kelantangan</string>
+    <string name="lock_volume_buttons_description">Apabila alarm berbunyi, kelantangan tidak boleh diturunkan atau dibisukan.</string>
     <string name="do_not_leave_alarm">Jangan tinggalkan skrin penggera</string>
     <string name="do_not_leave_alarm_description">Terus paparkan skrin penggera semasa penggera berbunyi.</string>
     <string name="block_volume_down">Sekat butang kurangkan kelantangan</string>

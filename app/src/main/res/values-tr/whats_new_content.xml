@@ -5,4 +5,6 @@
     <string name="whats_new_entry_1_note_1">Tüm verilerinizi bir dosyaya kaydedin</string>
     <string name="whats_new_entry_1_note_2">Verilerinizi örneğin yeni bir telefona aktarın</string>
     <string name="whats_new_entry_2">Zil sesi çalma iyileştirmeleri</string>
+    <string name="whats_new_entry_3">Ses düğmelerini kilitle</string>
+    <string name="whats_new_entry_3_note_1">Alarm çalarken sessize alınmasını engeller</string>
 </resources>

@@ -2,8 +2,10 @@ package com.sweak.qralarm.alarm.activity
 
 import android.app.KeyguardManager
 import android.content.Intent
+import android.media.AudioManager
 import android.os.Build
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.WindowManager
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -51,11 +53,14 @@ class AlarmActivity : FragmentActivity() {
     lateinit var userDataRepository: UserDataRepository
 
     private var isLaunchedFromMainActivity: Boolean = false
+    private var isVolumeLockEnabled: Boolean = false
     private var lastNavigateUpTime: Long = 0L
 
     @Suppress("DEPRECATION")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        volumeControlStream = AudioManager.STREAM_ALARM
 
         enableEdgeToEdge()
 
@@ -74,6 +79,13 @@ class AlarmActivity : FragmentActivity() {
         val alarmId = intent.extras?.getLong(EXTRA_ALARM_ID) ?: 0
         isLaunchedFromMainActivity =
             intent.extras?.getBoolean(EXTRA_LAUNCHED_FROM_MAIN_ACTIVITY) == true
+        isVolumeLockEnabled = intent.extras?.getBoolean(EXTRA_IS_VOLUME_LOCK_ENABLED) == true
+
+        lifecycleScope.launch {
+            userDataRepository.isAlarmVolumeLockEnabled.collect {
+                isVolumeLockEnabled = it
+            }
+        }
 
         setContent {
             val theme by userDataRepository.theme.collectAsStateWithLifecycle(Theme.Default)
@@ -305,11 +317,49 @@ class AlarmActivity : FragmentActivity() {
 
         isLaunchedFromMainActivity =
             intent.extras?.getBoolean(EXTRA_LAUNCHED_FROM_MAIN_ACTIVITY) == true
+
+        if (intent.hasExtra(EXTRA_IS_VOLUME_LOCK_ENABLED)) {
+            isVolumeLockEnabled = intent.getBooleanExtra(EXTRA_IS_VOLUME_LOCK_ENABLED, false)
+        }
+    }
+
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        if (isVolumeLockEnabled) {
+            when (event.keyCode) {
+                KeyEvent.KEYCODE_VOLUME_DOWN,
+                KeyEvent.KEYCODE_VOLUME_UP,
+                KeyEvent.KEYCODE_VOLUME_MUTE -> return true
+            }
+        }
+        return super.dispatchKeyEvent(event)
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (isVolumeLockEnabled) {
+            when (keyCode) {
+                KeyEvent.KEYCODE_VOLUME_DOWN,
+                KeyEvent.KEYCODE_VOLUME_UP,
+                KeyEvent.KEYCODE_VOLUME_MUTE -> return true
+            }
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    override fun onKeyUp(keyCode: Int, event: KeyEvent?): Boolean {
+        if (isVolumeLockEnabled) {
+            when (keyCode) {
+                KeyEvent.KEYCODE_VOLUME_DOWN,
+                KeyEvent.KEYCODE_VOLUME_UP,
+                KeyEvent.KEYCODE_VOLUME_MUTE -> return true
+            }
+        }
+        return super.onKeyUp(keyCode, event)
     }
 
     companion object {
         const val EXTRA_ALARM_ID = "alarmId"
         const val EXTRA_LAUNCHED_FROM_MAIN_ACTIVITY = "launchedFromMainActivity"
+        const val EXTRA_IS_VOLUME_LOCK_ENABLED = "isVolumeLockEnabled"
 
         private val ALARM_CONFIRMATION_DISPLAY_DURATION = 3.seconds
     }

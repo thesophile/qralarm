@@ -180,6 +180,9 @@
     <string name="get_it_now">שדרגו עכשיו!</string>
     <string name="not_now">לא עכשיו</string>
     <string name="special_settings">הגדרות מיוחדות</string>
+    <string name="alarm_settings">הגדרות שעון</string>
+    <string name="lock_volume_buttons">נעל את כפתורי העוצמה</string>
+    <string name="lock_volume_buttons_description">כל עוד השעון מצלצל, לא ניתן להנמיך או להשתיק את העוצמה.</string>
     <string name="do_not_leave_alarm">להישאר במסך השעון המעורר</string>
     <string name="do_not_leave_alarm_description">השאירו את מסך השעון המעורר פתוח בזמן שהוא מצלצל.</string>
     <string name="block_volume_down">חסימת הנמכת עוצמת הקול</string>

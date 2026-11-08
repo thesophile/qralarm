@@ -49,6 +49,7 @@ class CreateBackupTest {
         emergencySliderRange: IntRange = 0..100,
         emergencyRequiredMatches: Int = 1,
         isEmergencyDisableRepeatingAlarmsEnabled: Boolean = false,
+        isAlarmVolumeLockEnabled: Boolean = false,
         theme: Theme = Theme.Default
     ) {
         coEvery { backupRepository.readAlarmsForBackup() } returns alarms
@@ -59,6 +60,7 @@ class CreateBackupTest {
                 flowOf(emergencyRequiredMatches)
         every { userDataRepository.isEmergencyDisableRepeatingAlarmsEnabled } returns
                 flowOf(isEmergencyDisableRepeatingAlarmsEnabled)
+        every { userDataRepository.isAlarmVolumeLockEnabled } returns flowOf(isAlarmVolumeLockEnabled)
         every { userDataRepository.theme } returns flowOf(theme)
     }
 
@@ -77,6 +79,7 @@ class CreateBackupTest {
             emergencySliderRange = 20..80,
             emergencyRequiredMatches = 4,
             isEmergencyDisableRepeatingAlarmsEnabled = true,
+            isAlarmVolumeLockEnabled = true,
             theme = Theme.Dynamic
         )
 
@@ -93,6 +96,7 @@ class CreateBackupTest {
                     emergencySliderRange = 20..80,
                     emergencyRequiredMatches = 4,
                     emergencyDisableRepeatingAlarms = true,
+                    alarmVolumeLockEnabled = true,
                     theme = Theme.Dynamic
                 )
             )

@@ -10,8 +10,12 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.pm.ServiceInfo
+import android.database.ContentObserver
 import android.media.AudioManager
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
+import android.provider.Settings
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.app.NotificationCompat
 import androidx.core.app.ServiceCompat
@@ -19,14 +23,20 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.sweak.qralarm.R
 import com.sweak.qralarm.alarm.ALARM_NOTIFICATION_CHANNEL_ID
+import com.sweak.qralarm.alarm.ALARM_VOLUME_LOCK_CHECK_INTERVAL_MILLIS
 import com.sweak.qralarm.alarm.QRAlarmManager
 import com.sweak.qralarm.alarm.activity.AlarmActivity
+import com.sweak.qralarm.alarm.util.AlarmVolumeGuard
+import com.sweak.qralarm.alarm.util.getAlarmVolume
+import com.sweak.qralarm.alarm.util.getMaxAlarmVolume
+import com.sweak.qralarm.alarm.util.getMinAlarmVolume
 import com.sweak.qralarm.alarm.util.setAlarmVolume
 import com.sweak.qralarm.core.designsystem.theme.Jacarta
 import com.sweak.qralarm.core.domain.alarm.Alarm
 import com.sweak.qralarm.core.domain.alarm.AlarmsRepository
 import com.sweak.qralarm.core.domain.alarm.DisableAlarm
 import com.sweak.qralarm.core.domain.alarm.SetAlarm
+import com.sweak.qralarm.core.domain.alarm.calculateAlarmVolumeIndex
 import com.sweak.qralarm.core.domain.user.UserDataRepository
 import com.sweak.qralarm.core.ui.sound.AlarmRingtonePlayer
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +46,10 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
@@ -60,6 +73,8 @@ class AlarmService : Service() {
     @Inject
     lateinit var audioManager: AudioManager
     @Inject
+    lateinit var alarmVolumeGuard: AlarmVolumeGuard
+    @Inject
     lateinit var userDataRepository: UserDataRepository
 
     private lateinit var alarm: Alarm
@@ -68,6 +83,12 @@ class AlarmService : Service() {
     private var emergencyTaskAlarmMuteJob: Job? = null
     private var hasAlarmBeenAlreadyTemporarilyMuted = false
     private var originalSystemAlarmVolume: Int? = null
+    private var alarmVolumeAtRingTime: Int? = null
+    private var volumeLockJob: Job? = null
+    private var volumeObserver: ContentObserver? = null
+
+    @Volatile
+    private var isVolumeLockActive = false
 
     private val temporaryAlarmMuteReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -125,11 +146,15 @@ class AlarmService : Service() {
             }
         }
 
+        val isVolumeLockEnabled = runCatching {
+            runBlocking(Dispatchers.IO) { userDataRepository.isAlarmVolumeLockEnabled.first() }
+        }.getOrDefault(false)
+
         try {
             ServiceCompat.startForeground(
                 this,
                 alarmId.toInt(),
-                createAlarmNotification(alarmId = alarmId),
+                createAlarmNotification(alarmId = alarmId, isVolumeLockEnabled = isVolumeLockEnabled),
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
                     ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
                 } else 0
@@ -210,6 +235,8 @@ class AlarmService : Service() {
 
             adjustAlarmVolume()
 
+            startVolumeLock()
+
             withContext(Dispatchers.Main) {
                 startAlarm()
             }
@@ -219,13 +246,14 @@ class AlarmService : Service() {
     }
 
     @SuppressLint("FullScreenIntentPolicy")
-    private fun createAlarmNotification(alarmId: Long): Notification {
+    private fun createAlarmNotification(alarmId: Long, isVolumeLockEnabled: Boolean): Notification {
         val alarmNotificationPendingIntent = PendingIntent.getActivity(
             applicationContext,
             alarmId.toInt(),
             Intent(applicationContext, AlarmActivity::class.java).apply {
                 putExtra(AlarmActivity.EXTRA_ALARM_ID, alarmId)
                 putExtra(AlarmActivity.EXTRA_LAUNCHED_FROM_MAIN_ACTIVITY, false)
+                putExtra(AlarmActivity.EXTRA_IS_VOLUME_LOCK_ENABLED, isVolumeLockEnabled)
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             },
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
@@ -237,6 +265,7 @@ class AlarmService : Service() {
             Intent(applicationContext, AlarmActivity::class.java).apply {
                 putExtra(AlarmActivity.EXTRA_ALARM_ID, alarmId)
                 putExtra(AlarmActivity.EXTRA_LAUNCHED_FROM_MAIN_ACTIVITY, false)
+                putExtra(AlarmActivity.EXTRA_IS_VOLUME_LOCK_ENABLED, isVolumeLockEnabled)
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             },
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
@@ -310,22 +339,91 @@ class AlarmService : Service() {
         }
     }
 
-    private fun adjustAlarmVolume() {
+    private suspend fun adjustAlarmVolume() {
+        val isLockEnabled = userDataRepository.isAlarmVolumeLockEnabled.first()
         val alarmVolumeMode = alarm.alarmVolumeMode
 
+        if (originalSystemAlarmVolume == null) {
+            originalSystemAlarmVolume = audioManager.getAlarmVolume()
+        }
+
         if (alarmVolumeMode is Alarm.AlarmVolumeMode.Custom) {
-            originalSystemAlarmVolume = audioManager.getStreamVolume(AudioManager.STREAM_ALARM)
+            audioManager.setAlarmVolume(
+                calculateAlarmVolumeIndex(
+                    volumePercentage = alarmVolumeMode.volumePercentage,
+                    minVolume = audioManager.getMinAlarmVolume(),
+                    maxVolume = audioManager.getMaxAlarmVolume()
+                )
+            )
+        } else if (isLockEnabled) {
+            val currentVol = audioManager.getAlarmVolume()
+            val minVol = audioManager.getMinAlarmVolume()
+            if (currentVol <= minVol) {
+                audioManager.setAlarmVolume(minVol + 1)
+            }
+        }
 
-            val maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_ALARM)
-            val minVolume = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                audioManager.getStreamMinVolume(AudioManager.STREAM_ALARM)
-            } else 0
-            val volumeRange = maxVolume - minVolume
-            val volumePercentage = alarmVolumeMode.volumePercentage
-            val volumeLevel = (minVolume + (volumeRange * (volumePercentage / 100.0))).toInt()
-                .coerceAtLeast(minVolume + 1)
+        // The volume the alarm rings at. Whatever the user does to the volume from now on, this is
+        // the level the alarm goes back to.
+        alarmVolumeAtRingTime = audioManager.getAlarmVolume()
+    }
 
-            audioManager.setAlarmVolume(volumeLevel)
+    /**
+     * Keeps the alarm volume from being lowered while the alarm is ringing.
+     */
+    private fun startVolumeLock() {
+        val lockedVolume = alarmVolumeAtRingTime ?: return
+
+        stopVolumeLock()
+        isVolumeLockActive = true
+
+        volumeLockJob = serviceScope.launch {
+            if (!userDataRepository.isAlarmVolumeLockEnabled.first()) return@launch
+
+            alarmVolumeGuard.restoreVolumeIfLowered(lockedVolume = lockedVolume)
+
+            withContext(Dispatchers.Main) {
+                if (isVolumeLockActive) {
+                    volumeObserver = object : ContentObserver(Handler(Looper.getMainLooper())) {
+                        override fun onChange(selfChange: Boolean) {
+                            super.onChange(selfChange)
+                            if (isVolumeLockActive) {
+                                alarmVolumeGuard.restoreVolumeIfLowered(lockedVolume = lockedVolume)
+                            }
+                        }
+                    }
+                    try {
+                        contentResolver.registerContentObserver(
+                            Settings.System.CONTENT_URI,
+                            true,
+                            volumeObserver!!
+                        )
+                    } catch (_: Exception) {
+                    }
+                }
+            }
+
+            while (isActive && isVolumeLockActive) {
+                delay(ALARM_VOLUME_LOCK_CHECK_INTERVAL_MILLIS)
+
+                if (!isVolumeLockActive) break
+
+                alarmVolumeGuard.restoreVolumeIfLowered(lockedVolume = lockedVolume)
+            }
+        }
+    }
+
+    private fun stopVolumeLock() {
+        isVolumeLockActive = false
+        volumeLockJob?.cancel()
+        volumeLockJob = null
+
+        volumeObserver?.let {
+            try {
+                contentResolver.unregisterContentObserver(it)
+            } catch (_: Exception) {
+            }
+            volumeObserver = null
         }
     }
 
@@ -361,6 +459,8 @@ class AlarmService : Service() {
         emergencyTaskAlarmMuteJob = null
         hasAlarmBeenAlreadyTemporarilyMuted = false
 
+        stopVolumeLock()
+
         try {
             unregisterReceiver(temporaryAlarmMuteReceiver)
             unregisterReceiver(emergencyTaskAlarmMuteReceiver)
@@ -373,6 +473,7 @@ class AlarmService : Service() {
             audioManager.setAlarmVolume(it)
         }
         originalSystemAlarmVolume = null
+        alarmVolumeAtRingTime = null
     }
 
     override fun onDestroy() {
@@ -380,6 +481,8 @@ class AlarmService : Service() {
 
         temporaryAlarmMuteJob?.cancel()
         emergencyTaskAlarmMuteJob?.cancel()
+
+        stopVolumeLock()
 
         try {
             unregisterReceiver(temporaryAlarmMuteReceiver)

@@ -169,6 +169,9 @@
     <string name="get_it_now">Uppgradera nu!</string>
     <string name="not_now">Inte nu</string>
     <string name="special_settings">Särskilda inställningar</string>
+    <string name="alarm_settings">Alarminställningar</string>
+    <string name="lock_volume_buttons">Lås volymknapparna</string>
+    <string name="lock_volume_buttons_description">Medan alarmet ringer kan volymen inte sänkas eller stängas av.</string>
     <string name="do_not_leave_alarm">Lämna inte alarmskärmen</string>
     <string name="do_not_leave_alarm_description">Visa alarmskärmen hela tiden medan alarmet ringer.</string>
     <string name="block_volume_down">Blockera volymsänkning</string>

@@ -40,7 +40,11 @@ fun WhatsNewDialog(onDismissRequest: () -> Unit) {
                 stringResource(R.string.whats_new_entry_1_note_2)
             )
         ),
-        WhatsNewEntry(text = stringResource(R.string.whats_new_entry_2))
+        WhatsNewEntry(text = stringResource(R.string.whats_new_entry_2)),
+        WhatsNewEntry(
+            text = stringResource(R.string.whats_new_entry_3),
+            notes = listOf(stringResource(R.string.whats_new_entry_3_note_1))
+        )
     )
 
     Dialog(

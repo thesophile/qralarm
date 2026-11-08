@@ -162,6 +162,9 @@
     <string name="get_it_now">Ulepsz teraz!</string>
     <string name="not_now">Nie teraz</string>
     <string name="special_settings">Ustawienia specjalne</string>
+    <string name="alarm_settings">Ustawienia alarmu</string>
+    <string name="lock_volume_buttons">Blokuj przyciski głośności</string>
+    <string name="lock_volume_buttons_description">Gdy alarm dzwoni, nie można zmniejszyć głośności ani jej wyciszyć.</string>
     <string name="do_not_leave_alarm">Nie opuszczaj alarmu</string>
     <string name="do_not_leave_alarm_description">Stale wyświetlaj ekran alarmu, gdy dzwoni.</string>
     <string name="block_volume_down">Blokowanie wyciszania</string>

@@ -5,4 +5,6 @@
     <string name="whats_new_entry_1_note_1">Save all your data to a file</string>
     <string name="whats_new_entry_1_note_2">Import your data on e.g. a new phone</string>
     <string name="whats_new_entry_2">Ringtone playback improvements</string>
+    <string name="whats_new_entry_3">Lock volume buttons</string>
+    <string name="whats_new_entry_3_note_1">Keep the alarm from being muted while it is ringing</string>
 </resources>

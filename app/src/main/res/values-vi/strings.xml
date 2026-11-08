@@ -159,6 +159,9 @@
     <string name="get_it_now">Nâng cấp ngay!</string>
     <string name="not_now">Để sau</string>
     <string name="special_settings">Cài đặt đặc biệt</string>
+    <string name="alarm_settings">Cài đặt báo thức</string>
+    <string name="lock_volume_buttons">Khóa các nút âm lượng</string>
+    <string name="lock_volume_buttons_description">Khi báo thức đang kêu, không thể giảm âm lượng hoặc tắt tiếng.</string>
     <string name="do_not_leave_alarm">Không rời khỏi màn hình báo thức</string>
     <string name="do_not_leave_alarm_description">Tiếp tục hiển thị màn hình báo thức khi chuông reo.</string>
     <string name="block_volume_down">Chặn giảm âm lượng</string>

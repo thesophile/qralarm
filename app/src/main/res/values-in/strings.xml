@@ -132,6 +132,9 @@
     <string name="get_it_now">Tingkatkan sekarang!</string>
     <string name="not_now">Tidak sekarang</string>
     <string name="special_settings">Pengaturan khusus</string>
+    <string name="alarm_settings">Pengaturan alarm</string>
+    <string name="lock_volume_buttons">Kunci tombol volume</string>
+    <string name="lock_volume_buttons_description">Selama alarm berbunyi, volume tidak dapat diturunkan atau dibisukan.</string>
     <string name="do_not_leave_alarm">Jangan tinggalkan alarm</string>
     <string name="do_not_leave_alarm_description">Tetap tampilkan layar alarm saat alarm berbunyi.</string>
     <string name="block_volume_down">Blokir volume turun</string>

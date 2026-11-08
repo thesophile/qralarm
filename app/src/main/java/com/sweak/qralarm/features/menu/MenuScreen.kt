@@ -40,6 +40,7 @@ fun MenuScreen(
     onBackClicked: () -> Unit,
     onOptimizationGuideClicked: () -> Unit,
     onEmergencyTaskSettingsClicked: () -> Unit,
+    onAlarmSettingsClicked: () -> Unit,
     onQRAlarmProClicked: () -> Unit,
     onCodesManagementClicked: () -> Unit,
     onThemeClicked: () -> Unit,
@@ -55,6 +56,9 @@ fun MenuScreen(
                 is MenuScreenUserEvent.OnOptimizationGuideClicked -> onOptimizationGuideClicked()
                 is MenuScreenUserEvent.OnEmergencyTaskSettingsClicked ->
                     onEmergencyTaskSettingsClicked()
+
+                is MenuScreenUserEvent.OnAlarmSettingsClicked ->
+                    onAlarmSettingsClicked()
 
                 is MenuScreenUserEvent.OnQRAlarmProClicked -> onQRAlarmProClicked()
                 is MenuScreenUserEvent.OnRateQRAlarmClicked -> {
@@ -164,6 +168,11 @@ fun MenuScreenContent(
                 MenuEntry(
                     title = stringResource(R.string.emergency_task),
                     onClick = { onEvent(MenuScreenUserEvent.OnEmergencyTaskSettingsClicked) }
+                )
+
+                MenuEntry(
+                    title = stringResource(R.string.alarm_settings),
+                    onClick = { onEvent(MenuScreenUserEvent.OnAlarmSettingsClicked) }
                 )
 
                 MenuEntry(

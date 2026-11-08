@@ -162,6 +162,9 @@
     <string name="get_it_now">Обновитесь сейчас!</string>
     <string name="not_now">Не сейчас</string>
     <string name="special_settings">Особые настройки</string>
+    <string name="alarm_settings">Настройки будильника</string>
+    <string name="lock_volume_buttons">Блокировать кнопки громкости</string>
+    <string name="lock_volume_buttons_description">Пока будильник звенит, громкость нельзя уменьшить или отключить.</string>
     <string name="do_not_leave_alarm">Не покидать будильник</string>
     <string name="do_not_leave_alarm_description">Продолжать отображение экрана будильника, когда будильник звонит.</string>
     <string name="block_volume_down">Блокировать уменьшение громкости</string>

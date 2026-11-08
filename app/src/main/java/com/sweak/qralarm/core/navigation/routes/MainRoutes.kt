@@ -25,6 +25,9 @@ data class SpecialAlarmSettingsRoute(val idOfAlarmToEdit: Long) : NavKey
 data class AlarmsChainSettingsRoute(val idOfAlarmToEdit: Long) : NavKey
 
 @Serializable
+data object AlarmSettingsRoute : NavKey
+
+@Serializable
 data object EmergencySettingsRoute : NavKey
 
 @Serializable

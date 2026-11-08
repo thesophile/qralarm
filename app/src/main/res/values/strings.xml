@@ -179,6 +179,9 @@
     <string name="not_now">Not now</string>
     <string name="qralarm_pro_package_name" translatable="false">com.sweak.qralarm.pro</string>
     <string name="special_settings">Special settings</string>
+    <string name="alarm_settings">Alarm settings</string>
+    <string name="lock_volume_buttons">Lock volume buttons</string>
+    <string name="lock_volume_buttons_description">While the alarm is ringing, the volume cannot be lowered or muted.</string>
     <string name="do_not_leave_alarm">Do not leave alarm</string>
     <string name="do_not_leave_alarm_description">Keep displaying alarm screen when the alarm is ringing.</string>
     <string name="block_volume_down">Block volume down</string>

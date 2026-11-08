@@ -334,6 +334,7 @@ class RestoreBackupTest {
                     emergencySliderRange = 20..80,
                     emergencyRequiredMatches = 4,
                     emergencyDisableRepeatingAlarms = true,
+                    alarmVolumeLockEnabled = true,
                     theme = Theme.Dynamic
                 )
             )
@@ -347,6 +348,7 @@ class RestoreBackupTest {
             userDataRepository.setEmergencySliderRange(range = 20..80)
             userDataRepository.setEmergencyRequiredMatches(matches = 4)
             userDataRepository.setEmergencyDisableRepeatingAlarms(disable = true)
+            userDataRepository.setAlarmVolumeLockEnabled(enabled = true)
             userDataRepository.setTheme(theme = Theme.Dynamic)
         }
     }

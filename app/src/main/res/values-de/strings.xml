@@ -142,6 +142,9 @@
     <string name="get_it_now">Jetzt upgraden!</string>
     <string name="not_now">Nicht jetzt</string>
     <string name="special_settings">Spezielle Einstellungen</string>
+    <string name="alarm_settings">Alarmeinstellungen</string>
+    <string name="lock_volume_buttons">Lautstärketasten sperren</string>
+    <string name="lock_volume_buttons_description">Solange der Alarm klingelt, kann die Lautstärke nicht verringert oder stummgeschaltet werden.</string>
     <string name="do_not_leave_alarm">Alarm nicht verlassen</string>
     <string name="do_not_leave_alarm_description">Zeigt weiterhin den Alarmbildschirm an, wenn der Alarm klingelt.</string>
     <string name="block_volume_down">Lautstärke verringern blockieren</string>

@@ -132,6 +132,10 @@ class RestoreBackup @Inject constructor(
             )
         }
 
+        preferences.alarmVolumeLockEnabled?.let { alarmVolumeLockEnabled ->
+            userDataRepository.setAlarmVolumeLockEnabled(enabled = alarmVolumeLockEnabled)
+        }
+
         preferences.theme?.let { theme ->
             userDataRepository.setTheme(theme = theme)
         }

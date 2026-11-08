@@ -132,6 +132,9 @@
     <string name="get_it_now">立即升级！</string>
     <string name="not_now">暂且不了</string>
     <string name="special_settings">特殊设置</string>
+    <string name="alarm_settings">闹钟设置</string>
+    <string name="lock_volume_buttons">锁定音量键</string>
+    <string name="lock_volume_buttons_description">闹钟响铃期间，无法调低音量或将其静音。</string>
     <string name="do_not_leave_alarm">留在闹钟界面</string>
     <string name="do_not_leave_alarm_description">闹钟响起时，在关闭前不能退出其界面</string>
     <string name="block_volume_down">禁止调低音量</string>

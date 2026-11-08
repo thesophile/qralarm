@@ -142,6 +142,9 @@
     <string name="get_it_now">Nu upgraden!</string>
     <string name="not_now">Niet nu</string>
     <string name="special_settings">Speciale instellingen</string>
+    <string name="alarm_settings">Alarminstellingen</string>
+    <string name="lock_volume_buttons">Volumeknoppen vergrendelen</string>
+    <string name="lock_volume_buttons_description">Zolang de alarm klinkt, kan het volume niet worden verlaagd of gedempt.</string>
     <string name="do_not_leave_alarm">Alarmscherm niet verlaten</string>
     <string name="do_not_leave_alarm_description">Blijf het alarmscherm weergeven wanneer het alarm afgaat.</string>
     <string name="block_volume_down">Blokkeer volume omlaag</string>

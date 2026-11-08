@@ -24,6 +24,7 @@ class CreateBackup @Inject constructor(
                 emergencySliderRange = userDataRepository.emergencySliderRange.first(),
                 emergencyRequiredMatches = userDataRepository.emergencyRequiredMatches.first(),
                 emergencyDisableRepeatingAlarms = userDataRepository.isEmergencyDisableRepeatingAlarmsEnabled.first(),
+                alarmVolumeLockEnabled = userDataRepository.isAlarmVolumeLockEnabled.first(),
                 theme = userDataRepository.theme.first()
             )
         )
